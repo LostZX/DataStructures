@@ -131,6 +131,7 @@ func (a *Array) RemoveItem(item int) bool {
 	return flag
 }
 
+// 删除全部 我这里直接new一个新数组
 func (a *Array) RemoveAll() {
 	a.data = make([]int, a.GetCapacity())
 	a.size = 0
