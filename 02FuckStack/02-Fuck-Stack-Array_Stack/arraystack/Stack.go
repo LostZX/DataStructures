@@ -14,11 +14,11 @@ func (s *Stack) Pop() interface{} {
 	return s.array.RemoveLast()
 }
 
-func (s *Stack) push(item interface{}) {
+func (s *Stack) Push(item interface{}) {
 	s.array.AddLast(item)
 }
 
-func (s *Stack) peek() interface{} {
+func (s *Stack) Peek() interface{} {
 	return s.array.Get(s.GetSize() - 1)
 }
 
