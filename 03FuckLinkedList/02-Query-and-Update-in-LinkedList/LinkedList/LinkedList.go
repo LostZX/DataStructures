@@ -67,33 +67,39 @@ func (l *LinkedList) GetPoint(index int) *Node {
 	return cur.next
 }
 
-func (l *LinkedList) AddFirst(e interface{}) {
-	node := &Node{e, nil}
-
-	if l.size == 0 {
-		l.dummyHead.next = node
-	} else {
-		// 先取出头节点的下一位，拼接到当前节点上，然后放到头节点
-		ref := l.dummyHead.next
-		node.next = ref
-		l.dummyHead.next = node
+func (l *LinkedList) Remove(e interface{}) *LinkedList {
+	cur := l.dummyHead
+	for cur.next != nil {
+		if cur.next.e == e {
+			cur.next = cur.next.next
+		} else {
+			cur = cur.next
+		}
 	}
+	return l
+}
+
+func (l *LinkedList) AddFirst(e interface{}) {
+	l.Add(0, e)
+}
+
+func (l *LinkedList) Add(index int, e interface{}) {
+	if 0 > index || index > l.size {
+		panic("Add failed, Illegal index.")
+	}
+
+	prev := l.dummyHead
+
+	for i := 0; i < index; i++ {
+		prev = prev.next
+	}
+
+	prev.next = &Node{e, prev.next}
 	l.size++
 }
 
 func (l *LinkedList) AddLast(e interface{}) {
-	node := &Node{e, nil}
-	if l.size == 0 {
-		l.dummyHead.next = node
-	} else {
-		// 便利到最后一个节点
-		cur := l.dummyHead
-		for cur.next != nil {
-			cur = cur.next
-		}
-		cur.next = node
-	}
-	l.size++
+	l.Add(l.size, e)
 }
 
 func (l *LinkedList) Contains(e interface{}) bool {
