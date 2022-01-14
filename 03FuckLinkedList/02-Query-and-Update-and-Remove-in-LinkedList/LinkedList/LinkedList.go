@@ -67,6 +67,18 @@ func (l *LinkedList) GetPoint(index int) *Node {
 	return cur.next
 }
 
+// RemoveFirst 为了实现一个栈
+func (l *LinkedList) RemoveFirst() interface{} {
+	if l.size == 0 {
+		panic("remove failed, index is out of range.")
+	}
+
+	node := l.dummyHead.next
+	l.dummyHead.next = node.next
+	l.size--
+	return node.e
+}
+
 func (l *LinkedList) Remove(e interface{}) *LinkedList {
 	cur := l.dummyHead
 	for cur.next != nil {
@@ -76,6 +88,7 @@ func (l *LinkedList) Remove(e interface{}) *LinkedList {
 			cur = cur.next
 		}
 	}
+	l.size--
 	return l
 }
 

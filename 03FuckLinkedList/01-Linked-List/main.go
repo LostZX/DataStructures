@@ -1,6 +1,6 @@
 package main
 
-import "./LinkedList"
+import "./linkedList"
 
 func main() {
 	LinkedList.Instance()
