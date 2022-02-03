@@ -14,6 +14,31 @@ func (n *Node) String() string {
 	return fmt.Sprint(n.e)
 }
 
+// 反转链表 感觉递归还不是很理解
+
+func Reverse(head *Node) *Node {
+	//// head.next == nil 用来判断是否到结尾，并且保存的head是pre
+	//递归实现
+	//if head == nil || head.next == nil {
+	//	return head
+	//}
+	//
+	//rev := Reverse(head.next)
+	//head.next.next = head
+	//head.next = nil
+	//return rev
+
+	prv := &Node{}
+	cur := head
+	for cur.next != nil {
+		next := cur.next
+		cur.next = prv
+		prv = cur
+		cur = next
+	}
+	return prv
+}
+
 type Node struct {
 	e    interface{}
 	next *Node
